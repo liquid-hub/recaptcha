@@ -43,20 +43,45 @@ var recaptchaVerify = function (response) {
   return ;
 };
 
-EventBus.subscribe('recaptcha:insales:loaded', function () {
-  var key = Shop.config.get('recaptcha_key').recaptcha_key;
+if (Shop.config.config.feedback_captcha_enabled) {
+  EventBus.subscribe('recaptcha:insales:loaded', function () {
+    var key = Shop.config.get('recaptcha_key').recaptcha_key;
 
-  $('.form-row #gRecaptcha').each(function(index, el) {
-    var randomId = 'gRecaptcha' + _.random(1, 99999999)
-    $(this).attr('id', randomId);
+    $('.form-row #gRecaptcha').each(function(index, el) {
+      var randomId = 'gRecaptcha' + _.random(1, 99999999)
+      $(this).attr('id', randomId);
 
-    grecaptchaWidget = grecaptcha.render($(el).get(0), {
-      sitekey: key,
-      callback: recaptchaVerify
+      grecaptchaWidget = grecaptcha.render($(el).get(0), {
+        sitekey: key,
+        callback: recaptchaVerify
+      });
+      window = { grecaptchaWidget: grecaptchaWidget };
     });
-    window = { grecaptchaWidget: grecaptchaWidget };
-  });
-})
+  })
+} else {
+  setTimeout(function () {
+    var loadCapthca = setInterval(function () {
+      if (grecaptcha) {
+        try {
+          $('.form-row #gRecaptcha').each(function(index, el) {
+            var randomId = 'gRecaptcha' + _.random(1, 99999999)
+            $(this).attr('id', randomId);
+            grecaptchaWidget = grecaptcha.render(randomId, {
+              sitekey: key,
+              callback: recaptchaVerify
+            });
+            window = { grecaptchaWidget: grecaptchaWidget };
+          });
+
+          clearInterval(loadCapthca);
+        } catch (e) {
+          console.log(e);
+          clearInterval(loadCapthca);
+        }
+      }
+    }, 500);
+  }, 0);
+}
 ```
 
 ## page.liquid
@@ -151,7 +176,7 @@ Shop.sendMessage(msg)
   });
 ```
 
-Заменить `fail` 
+Заменить `fail`
 ```
 .fail(function (response) {
   $.each(response.errors, function (i, val) {
