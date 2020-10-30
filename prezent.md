@@ -1,3 +1,5 @@
+Гайд подходит для шаблона Monpasie
+
 ## jquery.serialize-object.js
 
 Заменить:
