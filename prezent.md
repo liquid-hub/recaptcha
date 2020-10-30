@@ -83,19 +83,11 @@ EventBus.subscribe('recaptcha:insales:loaded', function () {
 
 ## main.js
 
-Вывод ошибки в предзаказе
+Вывод ошибки
 
 Заменить:
 
 ```
-Shop.sendMessage(
-  $preorderForm.serializeObject()
-  )
-  .done(function (response) {
-    alertify.success(response.notice);
-    $preorderForm.trigger('reset');
-    $.magnificPopup.close();
-  })
   .fail(function (response) {
     $.each(response.errors, function (i, val) {
       alertify.error(val[0]);
@@ -105,14 +97,6 @@ Shop.sendMessage(
 
 Вставить:
 ```
-Shop.sendMessage(
-  $preorderForm.serializeObject()
-  )
-  .done(function (response) {
-    alertify.success(response.notice);
-    $preorderForm.trigger('reset');
-    $.magnificPopup.close();
-  })
   .fail(function (response) {
     $.each(response.errors, function (i, val) {
       var errorText = (typeof val == 'string') ? val : val[0];
