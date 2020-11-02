@@ -37,7 +37,7 @@ window.recaptchaCallbackInsalesCommon = function () {
 }
 
 function scriptLoader (src) {
-  var testDouble = document.querySelector('script[src='+src+']');
+  var testDouble = document.querySelector('script[src="'+src+'"]');
   if (!testDouble) {
     var script_tag = document.createElement('script');
     script_tag.setAttribute('src', src);
