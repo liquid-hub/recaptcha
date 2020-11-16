@@ -1,3 +1,4 @@
+В js
 ```js
 EventBus.subscribe('recaptcha:insales:loaded', function () {
   var key = Shop.config.get('recaptcha_key').recaptcha_key;
@@ -20,12 +21,14 @@ EventBus.subscribe('recaptcha:insales:loaded', function () {
 })
 ```
 
+В форму
 ```html
 <div class="form-item">
   <div class="js-recaptcha-form-field"></div>
 </div>
 ```
 
+В настройки
 ```html
 <fieldset>
   <legend>Форма обратной связи</legend>
