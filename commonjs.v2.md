@@ -26,3 +26,8 @@ EventBus.subscribe('recaptcha:insales:loaded', function () {
   });
 })
 ```
+
+
+```html
+<div class="js-recaptcha-field"></div>
+```
