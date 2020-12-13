@@ -58,6 +58,10 @@ window.addEventListener('load', function() {
 });
 ```
 
+## Верстка
+
+В верстку вставить div с классом `js-recaptcha-field`
+
 
 ## settings.html
 
