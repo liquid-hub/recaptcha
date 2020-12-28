@@ -7,7 +7,7 @@
 window.recaptchaCallbackInsalesCommon = function () {
   var key = $('[name="shop-config"]').data('config').recaptcha_key;
   var recaptchaVerify = function (response) {
-    jquery('[name="g-recaptcha-response"]').html(response);
+    $('[name="g-recaptcha-response"]').html(response);
   };
 
   // селектор формы на странице обратной связи.
