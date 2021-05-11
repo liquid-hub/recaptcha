@@ -23,7 +23,7 @@ function initReCaptcha () {
 
 EventBus.subscribe('recaptcha:insales:loaded', initReCaptcha);
 
-$(document).on('click', '.js-messages', initReCaptcha)
+$(document).on('click', '.js-messages', initReCaptcha);
 ```
 
 В форму
