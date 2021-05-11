@@ -1,6 +1,6 @@
 В js
 ```js
-EventBus.subscribe('recaptcha:insales:loaded', function () {
+function initReCaptcha () {
   var key = Shop.config.get('recaptcha_key').recaptcha_key;
   var customFormSelector = '.js-feedback';
 
@@ -8,7 +8,7 @@ EventBus.subscribe('recaptcha:insales:loaded', function () {
     jquery(customFormSelector + ' [name="g-recaptcha-response"]').html(response);
   };
 
-  $('.js-recaptcha-form-field').each(function(index, el) {
+  $('.js-recaptcha-form-field').not('.recaptcha-inited').each(function(index, el) {
     if ($(window).width() < 360) {
       $(el).attr('data-size', 'compact').data('size', 'compact');
     }
@@ -17,8 +17,13 @@ EventBus.subscribe('recaptcha:insales:loaded', function () {
       callback: recaptchaVerify
     });
     window = { grecaptchaWidget: grecaptchaWidget };
+    $(el).addClass('recaptcha-inited');
   });
-})
+}
+
+EventBus.subscribe('recaptcha:insales:loaded', initReCaptcha);
+
+$(document).on('click', '.js-messages', initReCaptcha)
 ```
 
 В форму
